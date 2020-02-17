@@ -1,6 +1,7 @@
 
 
 
+
 #!bin/bash
 declare -A board
 InitBoard(){
@@ -53,12 +54,14 @@ return $DiceOutput
 }
 RollDice
 
+
 PlayerPosition=0
 DiceRoll(){
  DiceOutput=$(($(($RANDOM%6))+1))
 return $DiceOutput
 }
 DiceRoll
+
 echo "dice output is $DiceOutput
 
 echo 1 for No play
@@ -87,6 +90,7 @@ DiceRoll(){
 return $DiceOutput
 }
 DiceRoll
+
 
 
 
@@ -230,6 +234,7 @@ echo enter any option if you want to play again
 read option
 case $option in
 
+<<<<<<< HEAD
 
 1) echo $PlayerPosition
    ;;
@@ -241,11 +246,17 @@ case $option in
 
 3) PlayerPosition = $(( $PlayerPosition ))
 
+=======
+1) echo $PlayerPosition
+   ;;
+
+>>>>>>> useCase6{CountingTheWiningTimeOfDice}
 2) Ladder $PlayerPosition
   echo " player position :$PlayerPosition"
    ;;
 
 3) Snake $PlayerPosition
+
 
    echo player position is $PlayerPosition
    ;;
@@ -254,4 +265,12 @@ esac
 
 done
 
+
+
+   echo player position is $PlayerPosition
+   ;;
+esac
+count=$((count+1))
+done
+echo dice play to win $count times
 
