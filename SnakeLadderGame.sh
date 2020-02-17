@@ -1,7 +1,3 @@
-
-
-
-
 #!bin/bash
 declare -A board
 InitBoard(){
@@ -40,20 +36,12 @@ echo "------------------------------------------"
 done
 }
 PrintBoard
-
+RollDice(){
 DiceOutput=$(($RANDOM%6))
 return $DiceOutput
 }
 RollDice
 echo "dice out put is $DiceOutput"
-
-PlayerPosition=0
-RollDice(){
-DiceOutput=$((($RANDOM%6)+1))
-return $DiceOutput
-}
-RollDice
-
 
 PlayerPosition=0
 DiceRoll(){
@@ -80,25 +68,11 @@ echo "player in position :$PlayerPosition"
 echo "player position is $PlayerPosition"
 ;;
 esac
-
-
-option=$(($(($RANDOM%3))+1))
-case $option in
-PlayerPosition=0
-DiceRoll(){
- DiceOutput=$(($(($RANDOM%6))+1))
-return $DiceOutput
-}
-DiceRoll
-
-
-
-
 function Ladder(){
 
 DiceRoll
 DiceOutput=$?
-echo dice value is $DiceOutput
+echo "dice value is $DiceOutput"
 case $DiceOutput in
 1)PlayerPosition=$(($PlayerPosition+1)) 
 
@@ -146,14 +120,12 @@ case $DiceOutput in
         ;;
 esac
 }
-Ladder
+adder
 
 Snake(){
-echo
-
 DiceRoll
  DiceOutput=$?
-echo dice value is $DiceOutput
+echo "dice value is $DiceOutput"
 
    case $option in
      1) if [ $PlayerPosition -eq 0 ]
@@ -223,6 +195,7 @@ echo dice value is $DiceOutput
    *) echo error
    esac
 
+
 }
 echo "choose option you want to go lader or snak or no play"
 while(($PlayerPosition!=100))
@@ -230,46 +203,25 @@ do
 echo 1 for No play
 echo 2 for ladder
 echo 3 for snak
-echo enter any option if you want to play again
+echo "enter any option if you want to play again"
 read option
 case $option in
 
-<<<<<<< HEAD
 
 1) echo $PlayerPosition
    ;;
 
-
-2) PlayerPosition = $(( $PlayerPosition ))
-  echo " player position :$PlayerPosition"
-   ;;
-
-3) PlayerPosition = $(( $PlayerPosition ))
-
-=======
-1) echo $PlayerPosition
-   ;;
-
->>>>>>> useCase6{CountingTheWiningTimeOfDice}
-2) Ladder $PlayerPosition
+2)Ladder $PlayerPosition
   echo " player position :$PlayerPosition"
    ;;
 
 3) Snake $PlayerPosition
-
-
    echo player position is $PlayerPosition
    ;;
 esac
 
 
 done
-
-
-
-   echo player position is $PlayerPosition
-   ;;
-esac
 count=$((count+1))
 done
 echo dice play to win $count times
