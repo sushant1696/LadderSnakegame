@@ -9,7 +9,7 @@ function Ladder(){
 
 DiceRoll
 DiceOutput=$?
-echo dice value is $DiceOutput
+echo "dice value is $DiceOutput"
 case $DiceOutput in
 1)PlayerPosition=$(($PlayerPosition+1)) 
 
@@ -64,7 +64,7 @@ echo
 
 DiceRoll
  DiceOutput=$?
-echo dice value is $DiceOutput
+echo "dice value is $DiceOutput"
 
    case $option in
      1) if [ $PlayerPosition -eq 0 ]
@@ -141,7 +141,7 @@ do
 echo 1 for No play
 echo 2 for ladder
 echo 3 for snak
-echo enter any option if you want to play again
+echo "enter any option if you want to play again"
 read option
 case $option in
 
@@ -158,4 +158,4 @@ case $option in
 esac
 count=$((count+1))
 done
-echo dice play to win $count times
+echo "dice play to win $count times"
