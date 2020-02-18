@@ -1,8 +1,7 @@
-count=0
-count2=0
-PositionOf1stUser=0
-PositionOf2ndUser=0
+PositionOfPlayer1=0
+PositionOfPlayer2=0
 PlayerPosition=0
+
 DiceRoll(){
  DiceOutput=$(($(($RANDOM%6))+1))
 return $DiceOutput
@@ -13,13 +12,13 @@ function Ladder(){
 
 DiceRoll
 DiceOutput=$?
-echo dice value is $DiceOutput
+echo ladder dice value is $DiceOutput
 case $DiceOutput in
 1)PlayerPosition=$(($PlayerPosition+1)) 
 
         return $PlayerPosition
         ;;
-  2) if [$PlayerPosition -eq 99 ]
+  2) if [ $PlayerPosition -eq 99 ]
 	then
          return $PlayerPosition
 	else
@@ -35,7 +34,7 @@ case $DiceOutput in
        return $PlayerPosition
 	fi
         ;;
-4) if [ $PlayerPosition -eq 99 ] || [$PlayerPosition -eq 98 ] || [ $PlayerPosition -eq 97 ]
+4) if [ $PlayerPosition -eq 99 ] || [ $PlayerPosition -eq 98 ] || [ $PlayerPosition -eq 97 ]
 	then
          return $PlayerPosition
 	else
@@ -64,13 +63,11 @@ esac
 Ladder
 
 Snake(){
-echo
-
 DiceRoll
  DiceOutput=$?
-echo dice value is $DiceOutput
+echo snake dice value is $DiceOutput
 
-   case $option in
+   case $DiceOutput in
      1) if [ $PlayerPosition -eq 0 ]
 	then
 	return $PlayerPosition
@@ -139,72 +136,78 @@ echo dice value is $DiceOutput
    esac
 
 }
-userTurn1(){
+Snake
+
+Player1Turn(){
 position=$(($RANDOM%3+1))
-echo option check for user 1 is :$position
-
-#cash of ching option is start from here
   case $position in
-    1) echo "position : $PositionOf1stUser"
+    1) echo "position Of player1 is $PositionOfPlayer1"
        ;;
 
-    2) Ladder $PositionOf1stUser
-       PositionOf1stUser=$?
-       echo "position : $PositionOf1stUser"
+    2) Ladder $PositionOfPlayer1
+       PositionOfPlayer1=$?
+       echo "position of player1 $PositionOfPlayer1"
        ;;
 
-    3) Snake $PositionOf1stUser
-       PositionOf1stUser=$?
-       echo "position : $PositionOf1stUser"
+    3) Snake $PositionOfPlayer1
+       PositionOfPlayer1=$?
+       echo "position of player1 is $PositionOfPlayer1"
        ;;
 
     *)echo error
-  esac
-  count=$(($count+1))
-
+  esac 
 }
-userTurn1
-userTurn2(){
-position=$(($RANDOM%3+1))
-echo option for 2nd user is : $position
+Player1Turn
 
-#case is starting for here
+Player2Turn(){
+position=$(($(($RANDOM%3))+1))
+
+
   case $position in
-   1) echo "position : $PositionOf2ndUser"
+   1) echo "position of of player2 $PositionOfPlayer2"
       ;;
 
-   2) Ladder $PositionOf2ndUser
-      PositionOf2ndUser=$?
-      echo "position : $PositionOf2ndUser"
+   2) Ladder $PositionOfPlayer2
+     PositionOfPlayer2=$?
+      echo "position of player2 is $PositionOfPlayer2"
       ;;
 
-   3) Snake $PositionOf2ndUser
-      PositionOf2ndUser=$?
-      echo "position : $PositionOf2ndUser"
+   3) Snake $PositionOfPlayer2
+      PositionOfPlayer2=$?
+      echo "position of player2 is $PositionOfPlayer2"
       ;;
 
     *)echo error
   esac
-  count2=$(($count2+1))
 }
- win(){
+Player2Turn
 
-    if [ $PositionOf2ndUser -eq 100 ] || [ $PositionOf1stUser -eq 100 ]
+ Win(){
+
+    if [ $PositionOfPlayer2 -eq 100 ] || [ $PositionOfPlayer1 -eq 100 ]
     then
-    echo User one score : $PositionOf1stUser 
-    echo User two score : $PositionOf2ndUser 
+    echo player1 score : $PositionOfPlayer1 
+    echo player2 score : $PositionOfPlayer2 
     
-        if(($PositionOf2ndUser==100))
+        if(($PositionOfPlayer2==100))
         then
-        echo user 2 wins
+        echo "player 2 wins"
         fi
 
-        if(($PositionOf1stUser==100))
+        if(($PositionOfPlayer1==100))
         then
-        echo user 1 wins
+        echo "player 1 wins"
         fi
 
-       exit 
+       exit
     fi
 }
 Win
+play=1
+while(($play!=0))
+do
+Player1Turn
+Win
+Player2Turn
+Win
+done
